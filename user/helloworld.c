@@ -2,6 +2,6 @@
 #include "user/user.h"
 
 int main() {
-    printf("hello World\n");
+    printf("Hello World\n");
     exit(0);
 }

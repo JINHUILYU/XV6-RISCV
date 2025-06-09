@@ -139,9 +139,12 @@ UPROGS=\
 	$U/_grind\
 	$U/_wc\
 	$U/_zombie\
-	$U/_hello\
+	$U/_helloworld\
 	$U/_myforktest\
 	$U/_execdemo\
+	$U/_mycat\
+	$U/_myfileread\
+	$U/_mypipe\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
