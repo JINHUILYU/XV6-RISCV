@@ -6,7 +6,7 @@ int main() {
     int pid;
     pid = fork();
     if(pid > 0){
-        sleep(10); // 等待子进城先输出
+        sleep(10); // 等待子进程先输出
         printf("parent: child=%d\n", pid);
         pid = wait(0);
         printf("child %d is done\n", pid);

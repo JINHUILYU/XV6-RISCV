@@ -145,6 +145,8 @@ UPROGS=\
 	$U/_mycat\
 	$U/_myfileread\
 	$U/_mypipe\
+	$U/_myforktest1\
+	$U/_myforktest2\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
