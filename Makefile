@@ -147,6 +147,7 @@ UPROGS=\
 	$U/_mypipe\
 	$U/_myforktest1\
 	$U/_myforktest2\
+	$U/_top\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
