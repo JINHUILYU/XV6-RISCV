@@ -91,3 +91,22 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_getprocs(void)
+{
+  uint64 addr;
+  int max;
+
+  argaddr(0, &addr);
+  argint(1, &max);
+  if(max < 0)
+    return -1;
+  return getprocs(addr, max);
+}
+
+uint64
+sys_getkey(void)
+{
+  return consolegetkey();
+}
