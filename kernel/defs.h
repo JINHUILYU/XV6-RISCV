@@ -8,7 +8,6 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
-struct uproc;
 
 // bio.c
 void            binit(void);
@@ -19,7 +18,6 @@ void            bpin(struct buf*);
 void            bunpin(struct buf*);
 
 // console.c
-int             consolegetkey(void);
 void            consoleinit(void);
 void            consoleintr(int);
 void            consputc(int);
@@ -88,7 +86,6 @@ int             cpuid(void);
 void            exit(int);
 int             fork(void);
 int             growproc(int);
-int             getprocs(uint64, int);
 void            proc_mapstacks(pagetable_t);
 pagetable_t     proc_pagetable(struct proc *);
 void            proc_freepagetable(pagetable_t, uint64);

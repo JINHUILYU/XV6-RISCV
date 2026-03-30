@@ -5,7 +5,6 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
-#include "procinfo.h"
 
 struct cpu cpus[NCPU];
 
@@ -663,44 +662,6 @@ either_copyin(void *dst, int user_src, uint64 src, uint64 len)
     memmove(dst, (char*)src, len);
     return 0;
   }
-}
-
-int
-getprocs(uint64 addr, int max)
-{
-  struct proc *p;
-  struct proc *cur = myproc();
-  struct uproc kbuf[NPROC];
-  int n = 0;
-  int i;
-
-  if(max > NPROC)
-    max = NPROC;
-
-  acquire(&wait_lock);
-  for(p = proc; p < &proc[NPROC] && n < max; p++){
-    acquire(&p->lock);
-    if(p->state != UNUSED){
-      kbuf[n].pid = p->pid;
-      kbuf[n].ppid = p->parent ? p->parent->pid : 0;
-      kbuf[n].state = p->state;
-      kbuf[n].killed = p->killed;
-      kbuf[n].sz = p->sz;
-      memmove(kbuf[n].name, p->name, sizeof(kbuf[n].name));
-      n++;
-    }
-    release(&p->lock);
-  }
-  release(&wait_lock);
-
-  for(i = 0; i < n; i++){
-    if(copyout(cur->pagetable,
-               addr + (uint64)i * sizeof(struct uproc),
-               (char *)&kbuf[i], sizeof(struct uproc)) < 0)
-      return -1;
-  }
-
-  return n;
 }
 
 // Print a process listing to console.  For debugging.

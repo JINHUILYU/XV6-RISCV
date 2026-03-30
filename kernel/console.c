@@ -50,21 +50,7 @@ struct {
   uint r;  // Read index
   uint w;  // Write index
   uint e;  // Edit index
-  int lastkey; // Last typed key, for polling-style readers.
 } cons;
-
-int
-consolegetkey(void)
-{
-  int c;
-
-  acquire(&cons.lock);
-  c = cons.lastkey;
-  cons.lastkey = 0;
-  release(&cons.lock);
-
-  return c;
-}
 
 //
 // user write()s to the console go here.
@@ -150,9 +136,6 @@ void
 consoleintr(int c)
 {
   acquire(&cons.lock);
-
-  if(c != 0)
-    cons.lastkey = c;
 
   switch(c){
   case C('P'):  // Print process list.
